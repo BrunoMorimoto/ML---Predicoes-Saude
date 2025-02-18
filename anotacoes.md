@@ -151,4 +151,74 @@
     - Machine Learning para dados estruturados (predição) não é uma caixa preta, o cérebro sim
         - Não vai ser causal
 
+Artigo: How To Avoid machine learning pitfalls
+
+
+## Dia 02 - Predição com Machine Learning
+
+- Desenvolver algoritmos que façam boas predições em saúde
+- Principais razões técnicas pelas quais algoritmos às vezes não apresentam boa performace preditiva
+    - Extrapolação inadequada dos resultados
+    - Pré-processamento inadequado aos dados
+    - Sobreajuste (mais importante)
+    - Validação inadequada da qualidade dos algoritmos
+
+-- Cuidado com a sazonalidade dos dados
+
+-- Aprendizado Federado
+
+### Artigo: Improving the performance of machine learning algorithms for health outcomes predictions in multicentric cohorts
+
+- Os melhores desempenhos preditivos foram obtidos ao usar dados de treinamento do mesmo hospital, que foi a estratégia vencedora para 11 (61%) dos 18 hospitais participantes
+
+### Técnicas de Pré-Processamento
+- Seleção das variáveis
+    - Preditores plausíveis (bom senso do pesquisador)
+    - Coincidências acontecem em análises de big data
+        - Correlações de espúria (tylervigen.com)
+
+- Data Leakage
+    - Não é a variável que está predizendo o desfecho, mas o desfecho que está predizendo ela
+
+- Padronização
+    - Escala das variáveis pode afetar muito a qualidade das predições
+    - Alguns algoritmos darão preferência para valores mais altos, por isso é bom escalar
+    - Standard Scaler
+        - Ajuda muito os algoritmos mais clássicos
+
+- Redução de Dimensão
+    - Análise de Componentes Principais (PCA)
+    - PCA cria componentes principais não correlacionados
+
+- Variáveis Missing
+    - Grande diferença em relação a estudos de inferência, em que valores missing devem ser evitados
+
+- One Hot Enconding
+    - Categórica -> Flag numérica
+    - **Target Enconding** -> Transformar categóricas em contínuas, o valor da categoria vira o seu valor médio do desfecho entre os individuos dessa categoria
+
+### Artigo: Model Evaluation, Model Selection and Algorithm Selection
+
+- Com dados reais, costumam ganhar mais vezes (gradient boosting, random forest e **type fn**)
+
+- Modelo: função que acreditamos (esperamos) queu seja semelhante a verdadeira
+- Algoritmo: conjunto de instruções que permeiam as regras de decisões
+- Hiperparâmetros são os parâmetros (meta - parâmetros) que eu devo definir para o algoritmo (dificultando a vida dele)
+
+- Viés Pessimista
+
+Reamostragem
+- Bootstraping e incerteza
+    - Alta variância - Sobre ajuste
+    - Alto viés - Sub ajuste
+    - Ajustado
+
+- Validação Cruzada e otimização de hiperparâmetros
+    - K-Fold (Geralmente 10 folds, trade off ideal entre viés e variância)
+    - Salva os melhores hiperparametros
+    - Treina o modelo com esses hiperparametros
+    
+
+ 
+
 

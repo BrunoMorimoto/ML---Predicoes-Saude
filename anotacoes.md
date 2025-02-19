@@ -217,6 +217,161 @@ Reamostragem
     - K-Fold (Geralmente 10 folds, trade off ideal entre viés e variância)
     - Salva os melhores hiperparametros
     - Treina o modelo com esses hiperparametros
+
+## Dia 03 - Predição com Machine Learning
+
+- Métricas de Performance Preditiva
+- Estudar Algoritmos (arquitetura para o aprendizado, regras para a tomada de decisão)
+- Explicabilidade é mais importante para um estudo de associação, não é um resultado de pesquisa importante
+
+## Otimização de Hiperparâmetros
+- Grid Search: método iterativo e automatizado de otimização que testa todas as combinações de valores a partir de uma grade de valores (menos utilizado)
+- Random Search: Sorteia as combinações de hiperparâmetros para teste para se obter uma combinação ótima
+- HyperOpt (Otimização Bayesiana): busca encontrar hiperparâmetros no ponto mínimo ou máximo da função objetivo.
+- Validação Cruzada com combinação de diferentes hiperparâmetros (para definir a melhor combinação de hiperparâmetros)
+- Retreino do algoritmo com os dados do treino e com os hiperparâmetros definidos
+-- Observação: se a amostra for pequena ele tem mais chance de decorar os casos e ficar sobreajustado
+
+## Tipos de Modelos Preditivos
+- Regressão: variável predita é quantitativa
+- Classificação: variável a ser predita é uma categoria
+
+## Métricas de Performance
+- Regressão:
+    - Gráfico de dispersão da predição vs realidade
+    - RMSE : Raiz do Erro Quadrático Médio
+
+- Classificação
+    - Acurácia: Proporção de acertos
+### Importante
+    - A maioria das métricas assume uma distribuição balanceada
+    - As vezes FN (falso negativo) ou FP (falso positivo) são problemas
+    - Ele desconhece a utilização de LLM's para gerar dados ficticios
+## Artigo: To SMOTE, or not to SMOTE? --> Interessante
+
+    - Desfecho desbalanceado (Estratégia)
+        - Desenvolver algoritmo para as pessoas que tem maior risco com o desfecho para tentar balancear as classes
+        - Existe balanceamento minimo necessário? (>= 10%, regra de bolso)
+    - Estratégia 2
+        - Mudar Threshold (acima da probabilidade da amostra deveria ser sim)
+-- Cuidado com rebalanceamento dos dados
+
+## Matriz de Confusão
+    - Sensibilidade (Recall) = TP / TP + FN (Proporção dos casos positivos que o algoritmo está capturando)
+    - Especificidade = TN / FP + TN (Propoção dos casos negativos que o algoritmo está capturando)
+    - Precisão = TP / TP + FP (Valor Predito Positivo, entre os que eu falei que Sim, quantos acertei)
+    - FScore = Média da precisão e do Recall (Harmônica)
+
+## Métricas de Ranking
+    - Área abaixo da curva ROC
+    - Intuição: entre duas pessoas escolhidas aleatoriamente (em que uma tem o desfecho e a outra não), a AUC é a proporção de vezes que a predição será maior para a pessoa que de fato tem o desfecho.
+    - Área abaixo da curva ROC de 1 = Perfeito, 0.5 é ineficiente
+    - Regra de Bolso
+        - Acima de 0.9 -> Excelente
+        - Entre 0.8 e 0.9 -> Muito bom
+        - Entre 0.7 e 0.8 -> Bom
+        - Abaixa de 0.7 - Não tão bom
+
+## Artigo: Neonatal mortality prediction with routinely collected data
+
+## Gráficos de Calibração de Probabilidades
+    - Quadratic discriminant analysis e random forests
+
+## Algoritmos
+### Artigo: Comparison of gradient Boosting decision three algortihms for cpu performance
+- Melhor deles Gradient Boosting
+- Random Forest
+- Especificações de Gradient Boosting
+- Média de 3 a 4% de ganhos realizando a otimização de hiperparâmetros, em alguns casos até 50%
+- Escolher o melhor algoritmo e os melhores hiperparâmetros tem ganhos em média de 20%
+- XGBoost, LightGBM, CatBoost, Random Forest e TypeFN
+-- Obs: tem estratégia melhor que imitar o cérebro humano, por isso que os algoritmos hoje não fazem sentido
+
+- Árvores de decisão
+## Random Forest - Mais intuitivo
+    - Árvores Independentes uma das outras
+        - Paralelização
+    - Simples e fáceis de interpretar
+    - Uma árvore provavelmente vai sobreajustar seu modelo
+    - Solução: Ensemble
+    - Ensemble = vários algoritmos combinados (método que generaliza bem)
+    - Utilização de Bagging (bootstrap agregation)
+    - Bagging: selecionar amostras aleatórias dos dados de treino
+        - Introduz variabilidade
+    - Cada observação tem a mesma probabilidade de ser sorteada (com reposição)
+        - Mesmo tamanho dos dados originais, então cada observação tem 63,2% de probabilidade de ser sorteada em cada rodada
+    - Algumas árvores vão usar apenas uma parcela dos preditos (não todas as variáveis do treino)
+
+- Bagging + Seleção de Preditores em cada nós = Random Forest
+
+## GBDT (Gradiente Boosting)
+    - Treina árvores sequenciais
+    - O resultado predito será a soma das predições de todas as árvores
+    - Treinamento iterativo: nasce uma árvore depois da outra com o objetivo de minimizar o erro
+
+XGBoost - 2014 (árvores assimétricas)
+LightGM - 2016 (árvores simétricas)
+CatBoost - 2017 (árvores simétricas)
+
+### Competições Kaggle
+
+### Regressões Penalizadas
+    - Adicionar hiperparâmetros regularizadores
+        - L1 Lasso
+        - L2 Ridge
+### Redes Neurais
+    - Inspiradas pelo funcionamento do cerébro
+    - Não funciona muito bem para dados estruturados
+    - Input Layer | Hidden Layer | Output
+    - Apenas uma camada de transformação (1 Hidden Layer)
+
+### Deep Learning
+    - Mais de uma camada de transformação sequenciadas antes do output
+    - Adaptação de Deep Learning para dados estruturados
+        - Geralmente sai artigos sobre isso mais ainda não funciona muito bem (type fn foi o primeiro)
+
+## Pontos de virada do ML
+- 2012 -> Alex Net (uso de GPUs para treinar algoritmos de imagem, etc)
+- 2016 -> Alpha Go com Aprendizado por Reforço
+- 2022 Chat GPT
+
+- Back Propagation:
+    - Cada neuronio tem parametros aleatorios para transformar as variáveis
+            - Primeira Predição
+    - De trás pra frente reajusta os parametros dos neuronios para ajustar a predição e diminuir o erro daquela predição
+
+- Gradient Descent:
+    - No caminho de diminuir o erro de predição
+    - Mudando os parametros na direção de diminuir o erro de predição
+
+Back Propagation via Gradient Descent
+
+## Playground TensorFlow - dar uma brincada
+
+## TABPFN -> Performou melhor que o XGBoost e CatBoost
+
+## Artigo: When Do Neural Nets Outperform Boosted Tress on Tabular Data?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 
  

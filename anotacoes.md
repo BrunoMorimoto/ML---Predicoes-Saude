@@ -352,6 +352,122 @@ Back Propagation via Gradient Descent
 
 ## Artigo: When Do Neural Nets Outperform Boosted Tress on Tabular Data?
 
+## Dia 04 - Predição com Machine Learning
+
+- O objetivo do estudo não é explicar a decisão do modelo mas isso é importante para a explicação do algoritmo (não pode ter associação)
+- Aprendizado por transferência (readaptar algoritmos de acordo com a população)
+- Importante pensar nas variáveis preditoras
+- No treino vale tudo (criação de variáveis, etc)
+- Padrão Ouro: Área embaixo da curva ROC
+
+### TABPFN (Prier Feature Network) - Artigo da Nature
+- Versão 1 (2023)
+- Versão 2 (2025) 
+- Poucas informações e alta dimensionalidade
+    - O Algoritmo vem para resolver esse problema
+
+- Foundation Model para dados tabulares
+    - Geração de dados sintéticos
+    - In-context learning (ICL) (Modelo aprende com o contexto, Transformers)
+    - Redes Neurais Artificiais
+    - TabPFN consegue modelar a incerteza sem custo adicional (Ensemble Bayesiano)
+- Guardando Conhecimento entre Features
+    - Na modelagem de linguagem, o significado de uma palavra é consistente entre diferentes documentos, porém, em conjuntos de dados tabulares, o mesmo valor pode ter significados fundamentalmente diferentes.
+- Como capturar o conhecimento entre tabelas?
+    - Redes Neurais
+- Os dados sintéticos são essenciais para o modelo
+    - Os dados são gerados atráves de modelos estruturais causais (SCMs)
+- A geração dados incorpora estocasticidade
+    - Baseado em DAGs: Complexidade é controlada atráves do número de Nós
+        - Neural Network
+        - Tree
+        - Discretização
+    - Amostra Inicial:
+        - Gerados a partir de distribuição normal, uniforme e mista
+    - Pós-processamento: aplica-se a distribuição kumaraswamy (beta)
+    - Resultados da geração de dados sintéticos
+        - O modelo consegue aprender comportamentos complexos
+            - funções seno, modular, homocesticidade, heterocesticidade
+    - Em problemas de classificação, TabPFN performa melhor
+    - Ensemble do modelo TabPFN (PHE)
+- Comunidade TabPFN
+    - Discord
+    - Git Hub
+
+- É possível verificar as importâncias com o Shapley (ele é agnóstico a qualquer modelo)
+- O modelo aceita no máximo 10 mil linhas e 500 colunas
+    Travado na biblioteca do python
+
+## Pré-Processamento de Dados
+- 1. Preditores Plausíveis
+    - Pré-selecionar variáveis que sejam preditoras plausíveis (bom senso do pesquisador)
+        - Não precisam ser causais!!
+    - Coincidências acontecem em análises de big data e pode ser que o algoritmo dê muita importância para associações espúrias
+
+- 2. Cuidado com Data Leakage
+- 3. Variáveis Colineares
+
+## Seleção de Variáveis
+    - Após treinamento do modelo fazer feature selection
+ Artigo: Evaluation of variable selection methods for random forests and omics data sets
+    - Importância de variáveis Random Forest
+        - Embaralha os valores e faz a predição, calcula o erro para saber a importância
+    - Eliminação Recursiva das Variáveis
+        - Elimino e testo
+        - Variável pouco importante na precisa de outras variáveis
+
+## Boruta
+    - Compara as importâncias das preditoras reais com "sombras"
+    - A cada execução é gerada uma cópia de cada variável
+    - Valores das sombras são permutações das variáveis originais
+    - Random Forest é treinado com essa extensão dos dados
+    - Comparar a importância de variáveis reais com o valor máximo das sombras
+        - Variáveis só são relevantes se forem mais importantes que as permutadas
+    - Repetir o processo várias vezes e transformar em uma distribuição binomial
+    - Hit: quando a variável é mais importante que a sombra mais importante
+    - Sombras e variáveis menos importantes são retiradas e o processo é repetido até haver uma classificação para cada variável
+
+## Busca por Algoritmos Interpretáveis
+    - Identificar presença de preditores indesejáveis
+    - Auxiliar na decisão pelos profissionais
+    - Garantir melhor robustez
+    - Identificar preconceitos
+    - Existem mais casos que você vai precisar esconder a explicação do algoritmo do que explicá-la
+        - Manipular o sistema
+    - Interpretação Intrinseca
+        - Utilizar algoritmos interpretáveis (regressão linear, logística ou árvores simples de decisão)
+    - Interpretação Extrínseca (Explicabilidade): utilizar técnas que permitem retirar interpretação de algoritmos complexos após o treinamento
+
+## Artigo: Interpretable machine learning - a brief history, state of the art and challenges
+    - Livro Genius Makers (Criadores de Gênios)
+    - Regressão Linear e Árvores de Decisão são considerados modelos interpretáveis
+        - Em cenários de alta dimensão eles perdem essa interpretabilidade
+    - Rede neural convolucional profunda (CNN) - imagens que mapeiam os componentes
+    - Random Forest - analisar a estrutura da árvore para quantificar importância das variáveis
+    - Sensibilidade do modelo a perturbações
+        - Explicações contrafactuais: cenários hipotéticos/filosofia
+        - Shapley Values: colaboração/teoria dos jogos
+
+## Shapley Values
+    - SHAP (SHapley Additive exPlations)
+    - Baseado na teoria dos jogos
+        - O objetivo é identificar a contribuição individual de cada jogador
+        - O valor de Shapley nos diz quanto cada variável muda a predição da predição média
+        - O valor de Shapley é a contribuição média marginal de cada variável ao longo de todas as combinações possíveis das variáveis
+    - Última coisa que se faz em uma análise de ML
+        - Não é usado para tirar variável do modelo
+    - Entender os erros do algoritmo (como ele chegou na decisão errada?)
+
+
+
+
+
+
+
+
+
+
+
 
 
 

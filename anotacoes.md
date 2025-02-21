@@ -454,9 +454,47 @@ Back Propagation via Gradient Descent
         - O objetivo é identificar a contribuição individual de cada jogador
         - O valor de Shapley nos diz quanto cada variável muda a predição da predição média
         - O valor de Shapley é a contribuição média marginal de cada variável ao longo de todas as combinações possíveis das variáveis
+        - Diferentes coalizões
     - Última coisa que se faz em uma análise de ML
         - Não é usado para tirar variável do modelo
     - Entender os erros do algoritmo (como ele chegou na decisão errada?)
+    - Não coloquem os resultados do Shapley no resumo do artigo
+
+### Dia 05 - Predição com Machine Learning
+    - Transfer Learning (TL)
+        - Transferência de conhecimento do domínio de origem para o domínio de destino
+        - Objetivo: melhorar o desempenho do modelo
+        - TL vs ML Tradicional: envolve vários domínios e tarefas, ao contrário do ML Tradicional que utiliza domínio único
+    - O que transferir?
+        - Conhecimento adquirido (modelo pré-treinado/pesos)
+    - Como transferir?
+        - Mais comuns: redes neurais (Deep Learning)
+    - Quando transferir?
+        - Disponibilidade dos dados
+        - Similaridade dos outcomes
+        - Recursos Computacionais
+        - O modelo a ser transferido precisa de boa performance
+        - Muito aplicado para imagens e NLP
+    - IACOV-BR
+        - Aprendizado por transferencia em árvores
+            - Modelo pré-treinado na ORIGEM (melhor desempenho preditivo)
+            - Dados (ALVO) 
+                - Residuo 
+                - Ajuste fino: árvores adicionadas para capturar padroes especificos de ALVO
+            - Predição do ALVO
+
+## Aprendizado Federado
+    - Foco em privacidade
+    - Dados não podem sair de certo ambiente
+    - Sem transferência de dados do paciente | Transferência do Algoritmo
+    - Treinamento em dispositivos remotos
+    - Desafios: heterogeneidade e grande quantidade de dados
+    - Dados locais
+    - Modelo Global
+    - Principal Objetivo: preservação de privacidade + aceitação de novas colaborações (sem perda de controle de dados)
+    - Exemplo: Aprendizado Federado para predição da palavra seguinte em dispositivos móveis
+    
+
 
 
 
